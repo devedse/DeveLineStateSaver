@@ -12,6 +12,17 @@ namespace DeveLineStateSaver
         private LineStateData _lineStateData = new LineStateData();
         private string _fileName;
 
+        /// <summary>
+        /// Creates a LineStateSaver which doesn't save its state to a file. (In memory only)
+        /// </summary>
+        public LineStateSaver() : this(null)
+        {
+        }
+
+        /// <summary>
+        /// Creates a line state saver which saves its state to a file
+        /// </summary>
+        /// <param name="fileName">Filename of the json file to save the state data to</param>
         public LineStateSaver(string fileName)
         {
             _fileName = fileName;
@@ -27,7 +38,7 @@ namespace DeveLineStateSaver
 
         private void LoadData()
         {
-            if (File.Exists(_fileName))
+            if (!string.IsNullOrWhiteSpace(_fileName) && File.Exists(_fileName))
             {
                 using (var reader = new StreamReader(new FileStream(_fileName, FileMode.Open, FileAccess.Read, FileShare.Read)))
                 {
@@ -39,14 +50,17 @@ namespace DeveLineStateSaver
 
         private void SaveData()
         {
-            var serializedData = JsonConvert.SerializeObject(_lineStateData, Formatting.Indented, new JsonSerializerSettings
+            if (!string.IsNullOrWhiteSpace(_fileName))
             {
-                //TypeNameHandling = TypeNameHandling.All
-            });
+                var serializedData = JsonConvert.SerializeObject(_lineStateData, Formatting.Indented, new JsonSerializerSettings
+                {
+                    //TypeNameHandling = TypeNameHandling.All
+                });
 
-            using (var writer = new StreamWriter(new FileStream(_fileName, FileMode.Create, FileAccess.Write, FileShare.Read)))
-            {
-                writer.Write(serializedData);
+                using (var writer = new StreamWriter(new FileStream(_fileName, FileMode.Create, FileAccess.Write, FileShare.Read)))
+                {
+                    writer.Write(serializedData);
+                }
             }
         }
 
