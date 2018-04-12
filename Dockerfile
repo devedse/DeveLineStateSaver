@@ -13,7 +13,7 @@ RUN dotnet restore
 # copies the rest of your code
 COPY . .
 RUN dotnet build --configuration Release
-#RUN dotnet test --configuration Release ./DeveLineStateSaver.Tests/DeveLineStateSaver.Tests.csproj
+RUN dotnet test --configuration Release ./DeveLineStateSaver.Tests/DeveLineStateSaver.Tests.csproj
 RUN dotnet publish ./DeveLineStateSaver.ConsoleApp/DeveLineStateSaver.ConsoleApp.csproj --output /app/ --configuration Release
 
 # Stage 2

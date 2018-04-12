@@ -17,8 +17,8 @@ before_build:
 build_script:
   - cmd: dotnet build -c Release
 
-# test_script:
-#   - cmd: dotnet test -c release DeveLineStateSaver.Tests\DeveLineStateSaver.Tests.csproj
+test_script:
+  - cmd: dotnet test -c release DeveLineStateSaver.Tests\DeveLineStateSaver.Tests.csproj
   
 after_test:
   - cmd: dotnet pack -c Release DeveLineStateSaver\
