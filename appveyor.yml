@@ -3,22 +3,21 @@ os: Visual Studio 2015
 skip_tags: true
 configuration: Release
 
-assembly_info:
-  patch: true
-  file: '**\AssemblyInfo.*'
-  assembly_version: '{version}'
-  assembly_file_version: '{version}'
-
 before_build:
   - ps: .\scripts\set-version.ps1
   - cmd: dotnet --info
   - cmd: dotnet restore
+  - choco install opencover.portable
+  - choco install codecov
+  - choco install xunit
 
 build_script:
   - cmd: dotnet build -c Release
 
 test_script:
-  - cmd: dotnet test -c release DeveLineStateSaver.Tests\DeveLineStateSaver.Tests.csproj
+  #- cmd: dotnet test -c release DeveLineStateSaver.Tests\DeveLineStateSaver.Tests.csproj
+  - OpenCover.Console.exe -register:user -target:"dotnet.exe" -targetargs:"test .\DeveLineStateSaver.Tests\DeveLineStateSaver.Tests.csproj -c Release" -oldStyle -output:.\DeveLineStateSaver.Coverage.xml -filter:"+[DeveLineStateSaver*]*" 
+  - codecov -f "DeveImageOptimizer.Coverage.xml"
   
 after_test:
   - cmd: dotnet pack -c Release DeveLineStateSaver\
