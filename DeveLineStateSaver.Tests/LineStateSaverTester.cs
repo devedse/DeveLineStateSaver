@@ -17,6 +17,7 @@ namespace DeveLineStateSaver.Tests
             lss.Save(() => testCounter.SimpleCall(17));
             lss.Save(() => testCounter.SimpleCall(15));
             lss.Save(() => testCounter.SimpleCall(17));
+            lss.Save(() => testCounter.SimpleUnrelatedCall(17));
 
             Assert.Equal(2, testCounter.CallCount);
         }
@@ -45,7 +46,7 @@ namespace DeveLineStateSaver.Tests
             lss.Save(() => testCounter.ComplexCall(complexObject1));
             lss.Save(() => testCounter.ComplexCall(complexObject2));
             lss.Save(() => testCounter.ComplexCall(complexObject1));
-            lss.Save(() => testCounter.ComplexCall(complexObject2));
+            lss.Save(() => testCounter.ComplexUnrelatedCall(complexObject2));
 
             Assert.Equal(2, testCounter.CallCount);
         }

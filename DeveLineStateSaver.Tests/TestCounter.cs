@@ -10,6 +10,11 @@
             return input * 2;
         }
 
+        public int SimpleUnrelatedCall(int input)
+        {
+            return input;
+        }
+
         public ComplexObjectTest ComplexCall(ComplexObjectTest input)
         {
             CallCount++;
@@ -22,6 +27,11 @@
             };
 
             return retval;
+        }
+
+        public ComplexObjectTest ComplexUnrelatedCall(ComplexObjectTest input)
+        {
+            return input;
         }
     }
 }
