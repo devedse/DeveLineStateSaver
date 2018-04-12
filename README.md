@@ -1,2 +1,8 @@
 # DeveLineStateSaver
 The goal of this project is to be able to save the state of a code line and skip it if it already knows the result.
+
+## Build status
+
+| Travis (Linux/Osx build) | AppVeyor (Windows build) |
+|:------------------------:|:------------------------:|
+| [![Build Status](https://travis-ci.org/devedse/DeveLineStateSaver.svg?branch=master)](https://travis-ci.org/devedse/DeveLineStateSaver) | [![Build status](https://ci.appveyor.com/api/projects/status/datwgk9gb4gmpodi?svg=true)](https://ci.appveyor.com/project/devedse/develinestatesaver) |
