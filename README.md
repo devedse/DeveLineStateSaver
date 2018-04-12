@@ -7,6 +7,8 @@ The goal of this project is to be able to save the state of a code line and skip
 |:------------------------:|:------------------------:|
 | [![Build Status](https://travis-ci.org/devedse/DeveLineStateSaver.svg?branch=master)](https://travis-ci.org/devedse/DeveLineStateSaver) | [![Build status](https://ci.appveyor.com/api/projects/status/datwgk9gb4gmpodi?svg=true)](https://ci.appveyor.com/project/devedse/develinestatesaver) |
 
-## Code Coverage
+## Code Coverage Status
 
-[![codecov](https://codecov.io/gh/devedse/DeveLineStateSaver/branch/master/graph/badge.svg)](https://codecov.io/gh/devedse/DeveLineStateSaver)
+| CodeCov |
+|:-------:|
+| [![codecov](https://codecov.io/gh/devedse/DeveLineStateSaver/branch/master/graph/badge.svg)](https://codecov.io/gh/devedse/DeveLineStateSaver) |
