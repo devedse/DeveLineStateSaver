@@ -1,3 +1,3 @@
 docker login
-docker push devedse/devemazegeneratorcore:latest
+docker push devedse/develinestatesaver:latest
 pause

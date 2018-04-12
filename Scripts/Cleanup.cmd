@@ -1,3 +1,3 @@
 rmdir "%~dp0Output" /s /q
-del "%~dp0DeveMazeGeneratorCore.7z"
-del "%~dp0DeveMazeGeneratorCore.zip"
+del "%~dp0DeveLineStateSaver.7z"
+del "%~dp0DeveLineStateSaver.zip"

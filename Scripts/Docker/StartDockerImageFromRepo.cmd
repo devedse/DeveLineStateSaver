@@ -1,3 +1,3 @@
-docker pull devedse/devemazegeneratorcore:latest
-docker run -it --rm -p 0.0.0.0:5001:80 devedse/devemazegeneratorcore:latest
+docker pull devedse/develinestatesaver:latest
+docker run -it --rm devedse/develinestatesaver:latest
 pause
