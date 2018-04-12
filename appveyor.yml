@@ -16,7 +16,7 @@ build_script:
 
 test_script:
   #- cmd: dotnet test -c release DeveLineStateSaver.Tests\DeveLineStateSaver.Tests.csproj
-  - OpenCover.Console.exe -register:user -target:"dotnet.exe" -targetargs:"test .\DeveLineStateSaver.Tests\DeveLineStateSaver.Tests.csproj -c Release" -oldStyle -output:.\DeveLineStateSaver.Coverage.xml -filter:"+[DeveLineStateSaver*]*" 
+  - OpenCover.Console.exe -register:user -target:"dotnet.exe" -targetargs:"test .\DeveLineStateSaver.Tests\DeveLineStateSaver.Tests.csproj -c Release" -output:.\DeveLineStateSaver.Coverage.xml -filter:"+[DeveLineStateSaver*]*" 
   - codecov -f "DeveLineStateSaver.Coverage.xml"
   
 after_test:
