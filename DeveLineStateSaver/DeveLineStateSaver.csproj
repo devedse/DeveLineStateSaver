@@ -13,6 +13,7 @@
     <Description>This tool can be used to save the output of a code line based on the input and skip it the second time.</Description>
     <PackageProjectUrl>https://github.com/devedse/DeveLineStateSaver</PackageProjectUrl>
     <PackageTags>csharp;save;code;state</PackageTags>
+    <DebugType>full</DebugType>
   </PropertyGroup>
 
   <ItemGroup>
