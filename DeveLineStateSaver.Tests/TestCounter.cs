@@ -1,4 +1,6 @@
-﻿namespace DeveLineStateSaver.Tests
+﻿using System;
+
+namespace DeveLineStateSaver.Tests
 {
     public class TestCounter
     {
@@ -55,6 +57,11 @@
         public ComplexObjectTest ComplexUnrelatedCall(ComplexObjectTest input)
         {
             UnrelatedCallCount++;
+            return input;
+        }
+
+        public object ObjectCall(Action input)
+        {
             return input;
         }
     }
