@@ -109,5 +109,19 @@ namespace DeveLineStateSaver.Tests
 
             File.Delete(fileName);
         }
+
+        [Fact]
+        public void ClearsTheDataWhenCallingClearFunction()
+        {
+            var testCounter = new TestCounter();
+
+            var lss = new LineStateSaver();
+            lss.Save(() => testCounter.SimpleCall(15));
+
+            lss.Clear();
+            lss.Save(() => testCounter.SimpleCall(15));
+
+            Assert.Equal(2, testCounter.CallCount);
+        }
     }
 }
