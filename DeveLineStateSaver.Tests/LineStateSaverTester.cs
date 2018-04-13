@@ -132,5 +132,16 @@ namespace DeveLineStateSaver.Tests
 
             Assert.Contains("Could not cast function.body to type MethodCallExpression", ex.Message);
         }
+
+        [Fact]
+        public void ThrowsExceptionWhenMethodCallIsProvidedWithNestedMethodCalls()
+        {
+            var testCounter = new TestCounter();
+
+            var lss = new LineStateSaver();
+            var ex = Assert.Throws<InvalidOperationException>(() => lss.Save(() => testCounter.SimpleCall(int.Parse("5"))));
+
+            Assert.Contains("is not of type MemberExpression or ConstantExpression", ex.Message);
+        }
     }
 }
