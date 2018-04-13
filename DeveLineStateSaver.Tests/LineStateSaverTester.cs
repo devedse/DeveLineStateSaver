@@ -17,9 +17,12 @@ namespace DeveLineStateSaver.Tests
             lss.Save(() => testCounter.SimpleCall(17));
             lss.Save(() => testCounter.SimpleCall(15));
             lss.Save(() => testCounter.SimpleCall(17));
+            lss.Save(() => testCounter.SimpleCall(15, 17));
             lss.Save(() => testCounter.SimpleUnrelatedCall(17));
 
             Assert.Equal(2, testCounter.CallCount);
+            Assert.Equal(1, testCounter.DoubleParametersCallCount);
+            Assert.Equal(1, testCounter.UnrelatedCallCount);
         }
 
         [Fact]
@@ -46,9 +49,12 @@ namespace DeveLineStateSaver.Tests
             lss.Save(() => testCounter.ComplexCall(complexObject1));
             lss.Save(() => testCounter.ComplexCall(complexObject2));
             lss.Save(() => testCounter.ComplexCall(complexObject1));
+            lss.Save(() => testCounter.ComplexCall(complexObject1, complexObject2));
             lss.Save(() => testCounter.ComplexUnrelatedCall(complexObject2));
 
             Assert.Equal(2, testCounter.CallCount);
+            Assert.Equal(1, testCounter.DoubleParametersCallCount);
+            Assert.Equal(1, testCounter.UnrelatedCallCount);
         }
 
         [Fact]
@@ -64,7 +70,7 @@ namespace DeveLineStateSaver.Tests
 
             var lss1 = new LineStateSaver(fileName);
             var result1 = lss1.Save(() => testCounter.SimpleCall(16));
-            
+
             var lss2 = new LineStateSaver(fileName);
             var result2 = lss2.Save(() => testCounter.SimpleCall(16));
 
