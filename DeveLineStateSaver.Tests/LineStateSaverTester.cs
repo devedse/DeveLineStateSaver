@@ -123,5 +123,14 @@ namespace DeveLineStateSaver.Tests
 
             Assert.Equal(2, testCounter.CallCount);
         }
+
+        [Fact]
+        public void ThrowsExceptionWhenNoMethodCallIsProvided()
+        {
+            var lss = new LineStateSaver();
+            var ex = Assert.Throws<InvalidOperationException>(() => lss.Save(() => 3 + 5));
+
+            Assert.Contains("Could not cast function.body to type MethodCallExpression", ex.Message);
+        }
     }
 }
