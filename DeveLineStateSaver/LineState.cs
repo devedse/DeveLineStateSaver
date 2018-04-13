@@ -28,15 +28,20 @@ namespace DeveLineStateSaver
 
                 if (argAsConstant == null)
                 {
-                    dynamic blah = arg;
-                    argAsConstant = blah.Expression as ConstantExpression;
+                    var memberExpression = arg as MemberExpression;
 
+                    if (memberExpression == null)
+                    {
+                        throw new InvalidOperationException($"Argument [{i}] for {MethodName} is not of type MemberExpression or ConstantExpression but of type {arg.GetType()}. Value: {arg}");
+                    }
+
+                    argAsConstant = memberExpression.Expression as ConstantExpression;
                     if (argAsConstant == null)
                     {
-                        throw new InvalidOperationException($"Argument [{i}] for {MethodName} is not of type ConstantExpression but of type {arg.GetType()}. Value: {arg}");
+                        throw new InvalidOperationException($"Argument [{i}] Expression for {MethodName} is not of type ConstantExpression but of type {arg.GetType()}. Value: {arg}");
                     }
                     var val = argAsConstant.Value;
-                    string memberName = blah.Member.Name;
+                    string memberName = memberExpression.Member.Name;
 
                     var valType = val.GetType();
                     var members = valType.GetMembers(BindingFlags.Public | BindingFlags.Instance);
