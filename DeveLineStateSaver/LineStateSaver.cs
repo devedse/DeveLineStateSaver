@@ -3,6 +3,7 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace DeveLineStateSaver
 {
@@ -10,6 +11,7 @@ namespace DeveLineStateSaver
     {
         private LineStateData _lineStateData = new LineStateData();
         private string _fileName;
+        private object _locker = new object();
 
         /// <summary>
         /// Creates a LineStateSaver which doesn't save its state to a file. (In memory only)
@@ -56,20 +58,49 @@ namespace DeveLineStateSaver
                     //TypeNameHandling = TypeNameHandling.All
                 });
 
-                using (var writer = new StreamWriter(new FileStream(_fileName, FileMode.Create, FileAccess.Write, FileShare.Read)))
+                lock (_locker)
                 {
-                    writer.Write(serializedData);
+                    using (var writer = new StreamWriter(new FileStream(_fileName, FileMode.Create, FileAccess.Write, FileShare.Read)))
+                    {
+                        writer.Write(serializedData);
+                    }
                 }
             }
         }
 
-        //public async Task<T> Save<T>(Func<T> function)
-        //{
+        public async Task<T> Save<T>(Expression<Func<Task<T>>> function)
+        {
+            LineState callData = CreateCallData(function);
 
-        //    return await function();
-        //}
+            var foundObject = _lineStateData.Data.FirstOrDefault(t => t.IsEqualTo(callData));
+
+            if (foundObject != null)
+            {
+                return ObtainExistingResult<T>(callData, foundObject);
+            }
+
+            var func = function.Compile();
+            var result = await func();
+            return StoreNewlyCalledResult(callData, result);
+        }
 
         public T Save<T>(Expression<Func<T>> function)
+        {
+            LineState callData = CreateCallData(function);
+
+            var foundObject = _lineStateData.Data.FirstOrDefault(t => t.IsEqualTo(callData));
+
+            if (foundObject != null)
+            {
+                return ObtainExistingResult<T>(callData, foundObject);
+            }
+
+            var func = function.Compile();
+            var result = func();
+            return StoreNewlyCalledResult(callData, result);
+        }
+
+        private static LineState CreateCallData<T>(Expression<Func<T>> function)
         {
             var methodCallBody = function.Body as MethodCallExpression;
             if (methodCallBody == null)
@@ -77,20 +108,18 @@ namespace DeveLineStateSaver
                 throw new InvalidOperationException($"Could not cast function.body to type MethodCallExpression. Actual type: {function?.Body?.GetType()}");
             }
 
-            var callData = new LineState(methodCallBody);
+            return new LineState(methodCallBody);
+        }
 
-            var foundObject = _lineStateData.Data.FirstOrDefault(t => t.IsEqualTo(callData));
+        private static T ObtainExistingResult<T>(LineState callData, LineState foundObject)
+        {
+            var retval = JsonConvert.DeserializeObject<T>(foundObject.Output);
+            Console.WriteLine($"Found method call to {callData} in storage. Returning result: {foundObject.Output}");
+            return retval;
+        }
 
-            if (foundObject != null)
-            {
-                var retval = JsonConvert.DeserializeObject<T>(foundObject.Output);
-                Console.WriteLine($"Found method call to {callData} in storage. Returning result: {foundObject.Output}");
-                return retval;
-            }
-
-
-            var func = function.Compile();
-            var result = func();
+        private T StoreNewlyCalledResult<T>(LineState callData, T result)
+        {
             callData.Output = JsonConvert.SerializeObject(result);
             _lineStateData.Data.Add(callData);
             SaveData();
