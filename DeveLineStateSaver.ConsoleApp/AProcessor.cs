@@ -44,10 +44,7 @@ namespace DeveLineStateSaver.ConsoleApp
             var comp5 = _lineStateSaver.Save(() => LongRunningOperationComplex(complexObject2));
 
             Console.WriteLine();
-
-            
         }
-
 
         private int LongRunningOperation(int input)
         {
