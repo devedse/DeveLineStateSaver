@@ -55,7 +55,7 @@ namespace DeveLineStateSaver.Tests
 
             Assert.Equal(2, testCounter.CallCount);
             Assert.Equal(1, testCounter.DoubleParametersCallCount);
-            Assert.Equal(1, testCounter.UnrelatedCallCount);
+            Assert.Equal(1, testCounter.ComplexUnrelatedCallCount);
         }
 
         [Fact]
