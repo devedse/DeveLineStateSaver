@@ -10,8 +10,8 @@ namespace DeveLineStateSaver
     public class LineStateSaver
     {
         private LineStateData _lineStateData = new LineStateData();
-        private string _fileName;
-        private object _locker = new object();
+        private readonly string _fileName;
+        private readonly object _locker = new object();
 
         /// <summary>
         /// Creates a LineStateSaver which doesn't save its state to a file. (In memory only)

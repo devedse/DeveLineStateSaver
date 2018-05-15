@@ -7,6 +7,7 @@ namespace DeveLineStateSaver.Tests
     {
         public int CallCount { get; private set; }
         public int UnrelatedCallCount { get; private set; }
+        public int ComplexUnrelatedCallCount { get; private set; }
         public int DoubleParametersCallCount { get; private set; }
 
         public int SimpleCall(int input)
@@ -108,14 +109,14 @@ namespace DeveLineStateSaver.Tests
 
         public ComplexObjectTest ComplexUnrelatedCall(ComplexObjectTest input)
         {
-            UnrelatedCallCount++;
+            ComplexUnrelatedCallCount++;
             return input;
         }
 
         public async Task<ComplexObjectTest> ComplexUnrelatedCallAsync(ComplexObjectTest input)
         {
             await Task.Delay(1);
-            UnrelatedCallCount++;
+            ComplexUnrelatedCallCount++;
             return input;
         }
     }

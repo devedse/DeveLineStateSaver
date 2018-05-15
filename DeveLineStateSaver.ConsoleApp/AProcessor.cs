@@ -5,7 +5,7 @@ namespace DeveLineStateSaver.ConsoleApp
 {
     public class AProcessor
     {
-        private LineStateSaver _lineStateSaver;
+        private readonly LineStateSaver _lineStateSaver;
 
         public AProcessor()
         {

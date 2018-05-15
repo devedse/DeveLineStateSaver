@@ -8,7 +8,7 @@ namespace DeveLineStateSaver.Tests
     public class LineStateSaverAsyncTester
     {
         [Fact]
-        public async void OnlyCallsMethodOncePerSimpleObject()
+        public async Task OnlyCallsMethodOncePerSimpleObject()
         {
             var testCounter = new TestCounter();
 
@@ -27,7 +27,7 @@ namespace DeveLineStateSaver.Tests
         }
 
         [Fact]
-        public async void OnlyCallsMethodOncePerComplexObject()
+        public async Task OnlyCallsMethodOncePerComplexObject()
         {
             var testCounter = new TestCounter();
 
@@ -59,7 +59,7 @@ namespace DeveLineStateSaver.Tests
         }
 
         [Fact]
-        public async void CorrectlySerializesSimpleObject()
+        public async Task CorrectlySerializesSimpleObject()
         {
             string fileName = $"{nameof(CorrectlySerializesSimpleObject)}.json";
             if (File.Exists(fileName))
@@ -82,7 +82,7 @@ namespace DeveLineStateSaver.Tests
         }
 
         [Fact]
-        public async void CorrectlySerializesComplexObject()
+        public async Task CorrectlySerializesComplexObject()
         {
             string fileName = $"{nameof(CorrectlySerializesComplexObject)}.json";
             if (File.Exists(fileName))
@@ -112,7 +112,7 @@ namespace DeveLineStateSaver.Tests
         }
 
         [Fact]
-        public async void ClearsTheDataWhenCallingClearFunction()
+        public async Task ClearsTheDataWhenCallingClearFunction()
         {
             var testCounter = new TestCounter();
 
@@ -126,7 +126,7 @@ namespace DeveLineStateSaver.Tests
         }
 
         [Fact]
-        public async void ThrowsExceptionWhenNoMethodCallIsProvided()
+        public async Task ThrowsExceptionWhenNoMethodCallIsProvided()
         {
             var lss = new LineStateSaver();
             var ex = await Assert.ThrowsAsync<InvalidOperationException>(() => lss.Save(() => new Task<int>(() => 3 + 5)));
@@ -135,7 +135,7 @@ namespace DeveLineStateSaver.Tests
         }
 
         [Fact]
-        public async void ThrowsExceptionWhenMethodCallIsProvidedWithNestedMethodCalls()
+        public async Task ThrowsExceptionWhenMethodCallIsProvidedWithNestedMethodCalls()
         {
             var testCounter = new TestCounter();
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace DeveLineStateSaver.ConsoleApp
 {
@@ -10,18 +11,20 @@ namespace DeveLineStateSaver.ConsoleApp
 
         public override bool Equals(object obj)
         {
-            var other = obj as ComplexObject;
-            if (other == null)
-            {
-                return false;
-            }
+            var @object = obj as ComplexObject;
+            return @object != null &&
+                   Name == @object.Name &&
+                   Age == @object.Age &&
+                   Timer == @object.Timer;
+        }
 
-            if (Name != other.Name || Age != other.Age || Timer != other.Timer)
-            {
-                return false;
-            }
-
-            return true;
+        public override int GetHashCode()
+        {
+            var hashCode = -354006332;
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Name);
+            hashCode = hashCode * -1521134295 + Age.GetHashCode();
+            hashCode = hashCode * -1521134295 + Timer.GetHashCode();
+            return hashCode;
         }
 
         public override string ToString()
