@@ -2,9 +2,9 @@
 
 namespace DeveLineStateSaver.ConsoleApp
 {
-    class Program
+    public class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
             var proc = new AProcessor();
             proc.Go();

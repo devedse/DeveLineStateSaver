@@ -22,7 +22,6 @@ namespace DeveLineStateSaver.ConsoleApp
             var res4 = _lineStateSaver.Save(() => LongRunningOperation(20));
             var res5 = _lineStateSaver.Save(() => LongRunningOperation(500));
 
-
             var complexObject = new ComplexObject()
             {
                 Age = new DateTime(2018, 3, 4),

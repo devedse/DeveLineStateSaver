@@ -1,5 +1,4 @@
 ﻿using Newtonsoft.Json;
-using System.Linq.Expressions;
 
 namespace DeveLineStateSaver
 {
@@ -10,7 +9,6 @@ namespace DeveLineStateSaver
 
         public Argument()
         {
-
         }
 
         public Argument(string type, object value)

@@ -118,10 +118,5 @@ namespace DeveLineStateSaver.Tests
             UnrelatedCallCount++;
             return input;
         }
-
-        public object ObjectCall(Action input)
-        {
-            return input;
-        }
     }
 }
