@@ -12,3 +12,9 @@ The goal of this project is to be able to save the state of a code line and skip
 | CodeCov |
 |:-------:|
 | [![codecov](https://codecov.io/gh/devedse/DeveLineStateSaver/branch/master/graph/badge.svg)](https://codecov.io/gh/devedse/DeveLineStateSaver) |
+
+## Code Quality Status
+
+| SonarQube |
+|:---------:|
+| [![Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=DeveLineStateSaver&metric=alert_status)](https://sonarcloud.io/dashboard?id=DeveLineStateSaver) |
