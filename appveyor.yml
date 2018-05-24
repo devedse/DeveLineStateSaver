@@ -5,7 +5,7 @@ configuration: Release
 
 environment:
   sonarqubetoken:
-    secure: rF+kKj+Ca5djTLLLuERee2P6a+J3p8Hum/TCR2yhMNBVWs6skZ3eaCFQX4yhkvmK
+    secure: ppdeirHI9dsM7NpQgtwIRqXbiqhJZvIyHxOFhnME5HhRFS6IbYZqRppQi7fTqv37
 
 before_build:
   - ps: .\scripts\set-version.ps1
@@ -17,14 +17,14 @@ before_build:
   - choco install "msbuild-sonarqube-runner" -y
 
 build_script:
-  - SonarScanner.MSBuild.exe begin /k:"DeveLineStateSaver" /d:sonar.organization="devedse-github" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.login=%sonarqubetoken%
+  - SonarScanner.MSBuild.exe begin /k:"DeveLineStateSaver" /d:sonar.organization="devedse-github" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.login=%sonarqubetoken% /d:sonar.cs.opencover.reportsPaths=".\DeveLineStateSaver.Coverage.xml"
   - cmd: dotnet build -c Release
+  - OpenCover.Console.exe -register:user -target:"dotnet.exe" -targetargs:"test .\DeveLineStateSaver.Tests\DeveLineStateSaver.Tests.csproj -c Release" -oldstyle -output:.\DeveLineStateSaver.Coverage.xml -filter:"+[DeveLineStateSaver*]*"
   - SonarScanner.MSBuild.exe end /d:sonar.login=%sonarqubetoken%
+  - codecov -f "DeveLineStateSaver.Coverage.xml"
 
 test_script:
-  #- cmd: dotnet test -c release DeveLineStateSaver.Tests\DeveLineStateSaver.Tests.csproj
-  - OpenCover.Console.exe -register:user -target:"dotnet.exe" -targetargs:"test .\DeveLineStateSaver.Tests\DeveLineStateSaver.Tests.csproj -c Release" -oldstyle -output:.\DeveLineStateSaver.Coverage.xml -filter:"+[DeveLineStateSaver*]*"
-  - codecov -f "DeveLineStateSaver.Coverage.xml"
+  - cmd: dotnet test -c release DeveLineStateSaver.Tests\DeveLineStateSaver.Tests.csproj
   
 after_test:
   - cmd: dotnet pack -c Release DeveLineStateSaver\
