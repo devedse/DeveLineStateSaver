@@ -17,7 +17,7 @@ before_build:
   - choco install "msbuild-sonarqube-runner" -y
 
 build_script:
-  - SonarScanner.MSBuild.exe begin /k:"DeveLineStateSaver" /d:sonar.organization="devedse-github" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.login=%sonarqubetoken% /d:sonar.cs.opencover.reportsPaths=".\DeveLineStateSaver.Coverage.xml" /d:sonar.coverage.exclusions=".\DeveLineStateSaver.ConsoleApp\**\*.cs,.\DeveLineStateSaver.Tests\**\*.cs"
+  - SonarScanner.MSBuild.exe begin /k:"DeveLineStateSaver" /d:sonar.organization="devedse-github" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.login=%sonarqubetoken% /d:sonar.cs.opencover.reportsPaths=".\DeveLineStateSaver.Coverage.xml" /d:sonar.coverage.exclusions="DeveLineStateSaver.ConsoleApp/**/*.cs,DeveLineStateSaver.Tests/**/*.cs"
   - cmd: dotnet build -c Release
   - OpenCover.Console.exe -register:user -target:"dotnet.exe" -targetargs:"test .\DeveLineStateSaver.Tests\DeveLineStateSaver.Tests.csproj -c Release" -oldstyle -output:.\DeveLineStateSaver.Coverage.xml -filter:"+[DeveLineStateSaver*]*"
   - SonarScanner.MSBuild.exe end /d:sonar.login=%sonarqubetoken%
