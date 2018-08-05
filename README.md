@@ -18,3 +18,9 @@ The goal of this project is to be able to save the state of a code line and skip
 | SonarQube |
 |:---------:|
 | [![Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=DeveLineStateSaver&metric=alert_status)](https://sonarcloud.io/dashboard?id=DeveLineStateSaver) |
+
+## Package
+
+| NuGet |
+|:-----:|
+| [![NuGet](https://img.shields.io/nuget/v/DeveLibVipsNuget.svg)](https://www.nuget.org/packages/DeveLibVipsNuget/) |
