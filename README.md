@@ -23,4 +23,4 @@ The goal of this project is to be able to save the state of a code line and skip
 
 | NuGet |
 |:-----:|
-| [![NuGet](https://img.shields.io/nuget/v/DeveLibVipsNuget.svg)](https://www.nuget.org/packages/DeveLibVipsNuget/) |
+| [![NuGet](https://img.shields.io/nuget/v/DeveLineStateSaver.svg)](https://www.nuget.org/packages/DeveLineStateSaver/) |
