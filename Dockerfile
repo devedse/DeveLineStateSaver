@@ -18,7 +18,7 @@ RUN dotnet test --configuration Release ./DeveLineStateSaver.Tests/DeveLineState
 RUN dotnet publish ./DeveLineStateSaver.ConsoleApp/DeveLineStateSaver.ConsoleApp.csproj --output /app/ --configuration Release
 
 # Stage 2
-FROM microsoft/dotnet:2.2-runtime
+FROM microsoft/dotnet:2.2-runtime-alpine
 WORKDIR /app
 COPY --from=builder /app .
 ENTRYPOINT ["dotnet", "DeveLineStateSaver.ConsoleApp.dll"]
