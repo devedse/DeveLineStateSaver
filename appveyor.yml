@@ -29,7 +29,7 @@ build_script:
   
 after_test:
   - cmd: dotnet pack -c Release DeveLineStateSaver\
-  - cmd: Scripts\GoRepack.cmd
+  - ps: Scripts\Go7zip.ps1
 
 artifacts:
 - path: Scripts\DeveLineStateSaver.7z
