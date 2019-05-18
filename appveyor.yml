@@ -32,9 +32,9 @@ after_test:
   - ps: Scripts\GoPackage.ps1
 
 artifacts:
-- path: Scripts\DeveLineStateSaver.7z
+- path: Scripts\Output\DeveLineStateSaver.7z
   name: droppackage7z
-- path: Scripts\DeveLineStateSaver.zip
+- path: Scripts\Output\DeveLineStateSaver.zip
   name: droppackagezip
 - path: 'DeveLineStateSaver\bin\Release\*.nupkg'
   name: nugetPackages
