@@ -15,7 +15,7 @@ before_build:
   - choco install codecov
   - choco install xunit
   - choco install "msbuild-sonarqube-runner" -y
-  - choco install 7zip.portable
+  - choco install 7zip
 
 build_script:
   - SonarScanner.MSBuild.exe begin /k:"DeveLineStateSaver" /d:sonar.organization="devedse-github" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.login=%sonarqubetoken% /d:sonar.cs.opencover.reportsPaths=".\DeveLineStateSaver.Coverage.xml" /d:sonar.coverage.exclusions="DeveLineStateSaver.ConsoleApp/**/*.cs,DeveLineStateSaver.Tests/**/*.cs"

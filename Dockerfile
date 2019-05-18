@@ -1,5 +1,5 @@
 # Stage 1
-FROM microsoft/dotnet:2.2-sdk AS builder
+FROM mcr.microsoft.com/dotnet/core/sdk:2.2 AS builder
 WORKDIR /source
 
 # caches restore result by copying csproj file separately
@@ -18,7 +18,7 @@ RUN dotnet test --configuration Release ./DeveLineStateSaver.Tests/DeveLineState
 RUN dotnet publish ./DeveLineStateSaver.ConsoleApp/DeveLineStateSaver.ConsoleApp.csproj --output /app/ --configuration Release
 
 # Stage 2
-FROM microsoft/dotnet:2.2-runtime-alpine
+FROM mcr.microsoft.com/dotnet/core/runtime:2.2-alpine3.9
 WORKDIR /app
 COPY --from=builder /app .
 ENTRYPOINT ["dotnet", "DeveLineStateSaver.ConsoleApp.dll"]
